@@ -86,9 +86,10 @@ Now as root again (`sudo -i`), edit `/etc/systemd/system/mumble.service` appendi
 Run `systemctl daemon-reload` and then `service mumble restart` and you should be set with a tls certificate!
 
 
-## Use your USB speakerphone
+## Install the USB soundcard
 
-If you are using a USB speakerphone such as the US Robotics one that I am using, you will need to change the default system sound device.
+Because the raspberry pi does not come with a microphone port, we use a common USB soundcard to do that job.
+You will need to change the default system sound device.
 As root on your Raspberry Pi (`sudo -i`), find your device by running `aplay -l`, take note of the index of the device (likely 1) and then edit the alsa config (`/usr/share/alsa/alsa.conf`), changing the following:
 ```
 defaults.ctl.card 1
@@ -97,9 +98,13 @@ defaults.pcm.card 1
 _1 being the index of your device_
 
 
-If your speakerphone is too quiet, you can adjust the volume using amixer as such:
+If your headset is too quiet, you can adjust the volume using amixer as such:
 ```
 amixer -c 1 set Headphone 60%
+```
+or 
+```
+amixer -c 1 set Speaker 60%
 ```
 _1 being the index of your device_
 
