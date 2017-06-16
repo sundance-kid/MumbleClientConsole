@@ -1,14 +1,14 @@
-# Boot to talkiepi
-![assembled1](talkiepi_assembled_1.jpg "Assembled talkiepi 1")
+# Boot to RasPi stage intercom
+![assembled1](talkiepi_assembled_1.jpg "INSERT IMAGE HERE")
 
-This is a simple overview to scratch install talkiepi on your Raspberry Pi, and have it start on boot. 
+This is a simple overview to scratch install RasPi stage intercom (based on talkiepi) on your Raspberry Pi, and have it start on boot. 
 This document assumes that you have raspbian-jessie-lite installed on your SD card, and that the distribution is up to date.
 This document also asumes that you have already configured network/wifi connectivity on your Raspberry Pi.
 
-By default talkiepi will run without any arguments, it will autogenerate a username and then connect to my mumble server.
+By default it will run without any arguments, it will autogenerate a username and then connect to my mumble server.
 You can change this behavior by appending commandline arguments of `-server YOUR_SERVER_ADDRESS`, `-username YOUR_USERNAME` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed.
 
-talkiepi will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory.
+It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory.
 
 
 ## Create a user
@@ -36,9 +36,9 @@ export GOBIN=/home/mumble/bin
 cd $GOPATH
 
 go get github.com/layeh/gopus
-go get github.com/dchote/talkiepi
+go get github.com/MarcusWolschon/RasPi_stage_intercom
 
-cd $GOPATH/src/github.com/dchote/talkiepi
+cd $GOPATH/src/github.com/MarcusWolschon/RasPi_stage_intercom
 
 go build -o /home/mumble/bin/talkiepi cmd/talkiepi/main.go 
 ```
@@ -48,7 +48,7 @@ go build -o /home/mumble/bin/talkiepi cmd/talkiepi/main.go
 
 As root on your Raspberry Pi (`sudo -i`), copy mumble.service in to place:
 ```
-cp /home/mumble/gocode/src/github.com/dchote/talkiepi/conf/systemd/mumble.service /etc/systemd/system/mumble.service
+cp /home/mumble/gocode/src/github.com/MarcusWolschon/RasPi_stage_intercom/conf/systemd/mumble.service /etc/systemd/system/mumble.service
 
 systemctl enable mumble.service
 ```
