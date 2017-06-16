@@ -9,17 +9,17 @@ import (
 
 	"github.com/dchote/gumble/gumble"
 	_ "github.com/dchote/gumble/opus"
-	"github.com/dchote/talkiepi"
+	"github.com/MarcusWolschon/RasPi_stage_intercom"
 )
 
 func main() {
 	// Command line flags
-	server := flag.String("server", "talkiepi.projectable.me:64738", "the server to connect to")
+	server := flag.String("server", "192.168.1.1:64738", "the server to connect to")
 	username := flag.String("username", "", "the username of the client")
 	password := flag.String("password", "", "the password of the server")
 	insecure := flag.Bool("insecure", true, "skip server certificate verification")
 	certificate := flag.String("certificate", "", "PEM encoded certificate and private key")
-	channel := flag.String("channel", "talkiepi", "mumble channel to join by default")
+	channel := flag.String("channel", "Root", "mumble channel to join by default")
 
 	flag.Parse()
 

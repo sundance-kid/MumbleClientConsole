@@ -4,9 +4,10 @@
 This is a simple overview to scratch install RasPi stage intercom (based on talkiepi) on your Raspberry Pi, and have it start on boot. 
 This document assumes that you have raspbian-jessie-lite installed on your SD card, and that the distribution is up to date.
 This document also asumes that you have already configured network/wifi connectivity on your Raspberry Pi.
+(hint: add something like " ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:on" to cmdline.txt and create an empty file called "ssh" to get started.)
 
-By default it will run without any arguments, it will autogenerate a username and then connect to my mumble server.
-You can change this behavior by appending commandline arguments of `-server YOUR_SERVER_ADDRESS`, `-username YOUR_USERNAME` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed.
+By default it will run without any arguments, it will autogenerate a username and then connect to the Talkipi mumble server.
+You should change this behavior by appending commandline arguments of e.g. `-server 192.168.1.1:64738`, `-username CAM_A` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed.
 
 It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory.
 
@@ -110,3 +111,7 @@ _1 being the index of your device_
 
 
 I will be adding volume control settings in an upcoming push.
+
+## install mumble server
+
+First we need to get a mumble server. e.g. from https://wiki.natenom.de/mumble/mumble-herunterladen
