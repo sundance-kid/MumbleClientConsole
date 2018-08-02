@@ -30,54 +30,56 @@ You can use an M6 thread-cutter in the 3D printed plastic to make it screw in pe
 
 ### Generation 2: (in development)
 
-On the underside, there is a hole for a round 6 pin mini-DIN socket.
-It is less prone to false signals compare to TRS.
-Each function uses 2 pins.  1+2=GND 3+4=INPUT 5+6=VCC
+On the underside, there is a hole for a round 6 pin mini-DIN socket. 
+It is less prone to false signals compare to TRS. 
+Each function uses 2 pins.  1+2=GND 3+4=INPUT 5+6=VCC 
 
-There is a square hole in the side for volume +/- controls.
-I used Marquard model 1838.1402 
-https://www.marquardt-shop.com/de/produkte/schalter/wippschalter/1830/1838.1402/zeichnungen.html
+There is a square hole in the side for volume +/- controls. 
+I used Marquard model 1838.1402  
+https://www.marquardt-shop.com/de/produkte/schalter/wippschalter/1830/1838.1402/zeichnungen.html 
 
 Other changes:
 
-There is enough space for a battery-hat on top of the Raspberry.
-The Power over Ethernet -extractor no longer blocks the internal sound card. (unused here but can be used e.g. to output an LTC timecode for cameras.)
-Emergency access to the power-socket is easier. (In case som other power source needs to be connected RIGH NOW.)
-The audio output of the raspberry sound card (that has no microphone input) is accessible.
-The LEDs are labeled.
-The Pins to connect each LED and button to are also labeled on the inside.
+There is enough space for a battery-hat on top of the Raspberry. 
+The Power over Ethernet -extractor no longer blocks the internal sound card. (unused here but can be used e.g. to output an LTC timecode for cameras.) 
+Emergency access to the power-socket is easier. (In case som other power source needs to be connected RIGH NOW.) 
+The audio output of the raspberry sound card (that has no microphone input) is accessible. 
+The LEDs are labeled. 
+The Pins to connect each LED and button to are also labeled on the inside. 
 
 ## Installing
 
-Because Github as a file size limit and because I could not keep it updated, I do not offer an  SD-card image.
-When building your own image (Also see the Talkipi readme.md about that. It should be based on at least raspbian-stretch-lite),
-try to keep everything that is device-specific (IP-address, mumble user name, server-ip+password,...)
-in /boot, so it can be accessed from any random computer that can read and write FAT.
-You should have the filesystem read-only by default, so the box can be switched off in any state.
+Because Github as a file size limit and because I could not keep it updated, I do not offer an  SD-card image. 
+When building your own image (Also see the Talkipi readme.md about that. It should be based on at least raspbian-stretch-lite), 
+try to keep everything that is device-specific (IP-address, mumble user name, server-ip+password,...) 
+in /boot, so it can be accessed from any random computer that can read and write FAT. 
+You should have the filesystem read-only by default, so the box can be switched off in any state. 
 
-For the manual installation onto an existing Raspberry Pi, there is an install guide [here](doc/README.md).
-There is a script [INSTALL_INTERCOM](doc/INSTALL_INTERCOM) that does nearly all of these steps.  
+For the manual installation onto an existing Raspberry Pi, there is an install guide [here](doc/README.md). 
+There is a script [INSTALL_INTERCOM](doc/INSTALL_INTERCOM) that does nearly all of these steps.   
+
+In addition you can use GPIO 14+15 (pin 8+10) for volume+/volume- keys. Just copy VOLUMEKEYS_SERVER.txt and INTALL_VOLUME_KEYS into /boot (the root of the FAT-partition) and execute INTALL_VOLUME_KEYS as root. 
 
 ## GPIO and LEDs
 
 Pins used: (single row only, so no dual-row connectors are needed)
 
-#2  = (unused +5V)
-#4  = (unused +5V)
-#6  = GND
-#8  = (unused GPIO 14)
-#10 = (unused GPIO 15)
-#12 = GPIO 18 = +3.3V for "Online" LED
-#14 = GND
-#16 = GPIO 23 = +3.3V for "Participants" LED
-#18 = GPIO 24 = +3.3V for "Transmit" LED
-#20 = GND
-#22 = GPIO 25 = Push To Talk (PTT) Button input
-#24  = (unused GPIO 8)
-#26  = (unused GPIO 7)
-#28  = (unused I2C)
-#30 = GND
-#32 = GPIO 12 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
+* 2  = (unused +5V)
+* 4  = (unused +5V)
+* 6  = GND
+* 8  = GPIO 14 RESERVED for "Volume+" button
+* 10 = GPIO 15 RESERVED for "Volume-" button
+* 12 = GPIO 18 = +3.3V for "Online" LED
+* 14 = GND
+* 16 = GPIO 23 = +3.3V for "Participants" LED
+* 18 = GPIO 24 = +3.3V for "Transmit" LED
+* 20 = GND
+* 22 = GPIO 25 = Push To Talk (PTT) Button input
+* 24  = (unused GPIO 8)
+* 26 GPIO 7 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
+* 28  = (unused I2C)
+* 30 = GND
+* 32 = GPIO 12 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
 
 
 You can edit your pin assignments in `talkiepi.go`

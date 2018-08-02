@@ -1,21 +1,22 @@
 # Boot to RasPi stage intercom
 
 This is a simple overview to scratch install RasPi stage intercom (based on [talkiepi](https://github.com/dchote/talkiepi/)) on your Raspberry Pi, and have it start on boot. 
-This document assumes that you have raspbian-jessie-lite installed on your SD card, and that the distribution is up to date.
-This document also asumes that you have already configured network/wifi connectivity on your Raspberry Pi.
-(hint: add something like " ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:on" to cmdline.txt and create an empty file called "ssh" to get started.)
+This document assumes that you have raspbian-jessie-lite installed on your SD card, and that the distribution is up to date. 
+This document also asumes that you have already configured network/wifi connectivity on your Raspberry Pi. 
+(hint: add something like " ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:on" to cmdline.txt and create an empty file called "ssh" to get started.) 
 
-By default it will run without any arguments, it will autogenerate a username and then connect to the Talkipi mumble server.
-You should change this behavior by appending commandline arguments of e.g. `-server 192.168.1.1:64738`, `-username CAM_A` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed.
+By default it will run without any arguments, it will autogenerate a username and then connect to the Talkipi mumble server. 
+You should change this behavior by appending commandline arguments of e.g. `-server 192.168.1.1:64738`, `-username CAM_A` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed. 
 
-It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory.
+It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory. 
 
 
 ## TL:DR
 
 
-There is a script [INSTALL_INTERCOM](INSTALL_INTERCOM) that does nearly all of these steps. 
-It assumes a file /boot/INTERCOM_SERVER.txt with the content of /conf/systemd/mumble.service already adapted to your setup (server IP, username, password).
+There is a script [INSTALL_INTERCOM](INSTALL_INTERCOM) that does nearly all of these steps.  
+In addition INTALL_VOLUME_KEYS allowy you to also control the ALSA output level of the headphone via 2 buttons on GPIO-pins. 
+It assumes a file /boot/INTERCOM_SERVER.txt with the content of /conf/systemd/mumble.service already adapted to your setup (server IP, username, password). 
 
 ## Create a user
 
@@ -43,6 +44,7 @@ cd $GOPATH
 
 # formerly: go get github.com/layeh/gopus
 go get layeh.com/gopus
+go get github.com/dchote/gopus
 go get github.com/MarcusWolschon/RasPi_stage_intercom
 
 cd $GOPATH/src/github.com/MarcusWolschon/RasPi_stage_intercom
