@@ -18,23 +18,45 @@ You will also need a a random USB sound card (to have a microphone input) and a 
 (PoE to micro USB extractors exist to only require the one Ethernet cable and no local power supply or power bank)
 
 On the top side are 3 holes for 3mm LEDs in LED-fittings or 5mm LEDs without.
-Next to it is a 2.5mm TRS connector for an external Push-To-Talk button. You can use an M6 thread-cutter in the 3D printed plastic to make it screw in perfectly.
 The big hole is for a 19mm illuminated Push-To-Talk button.
 
+I do recomment Dupont connectors and the proper pliers instead of soldering the cables to a single connector.
+This way all wires can be removed in case you want to rehouse the electronics into an improved enclosure.
+
+### Generation 1:
+
+Next to it is a 2.5mm TRS connector for an external Push-To-Talk button.
+You can use an M6 thread-cutter in the 3D printed plastic to make it screw in perfectly.
+
+### Generation 2: (in development)
+
+On the underside, there is a hole for a round 6 pin mini-DIN socket.
+It is less prone to false signals compare to TRS.
+Each function uses 2 pins.  1+2=GND 3+4=INPUT 5+6=VCC
+
+There is a square hole in the side for volume +/- controls.
+I used Marquard model 1838.1402 
+https://www.marquardt-shop.com/de/produkte/schalter/wippschalter/1830/1838.1402/zeichnungen.html
+
+Other changes:
+
+There is enough space for a battery-hat on top of the Raspberry.
+The Power over Ethernet -extractor no longer blocks the internal sound card. (unused here but can be used e.g. to output an LTC timecode for cameras.)
+Emergency access to the power-socket is easier. (In case som other power source needs to be connected RIGH NOW.)
+The audio output of the raspberry sound card (that has no microphone input) is accessible.
+The LEDs are labeled.
+The Pins to connect each LED and button to are also labeled on the inside.
 
 ## Installing
 
-For an easy installation you can use the SD-card image provided.
-Just change cmdline.txt for the IP-address,
-start_intercom for the mumble-server and username
-and motd.txt for a custom greeting uppon SSH login.
-All these files are accessible on the FAT partition without access to a Linux machine that can read the main file system.
-The image will mount all file systems read-only. So it is safe to turn off at any time.
-
-You may want to change the password of the default Raspberry Pi user "pi" from "raspberry" to something else and create an individual SSH host key. 
+Because Github as a file size limit and because I could not keep it updated, I do not offer an  SD-card image.
+When building your own image (Also see the Talkipi readme.md about that. It should be based on at least raspbian-stretch-lite),
+try to keep everything that is device-specific (IP-address, mumble user name, server-ip+password,...)
+in /boot, so it can be accessed from any random computer that can read and write FAT.
+You should have the filesystem read-only by default, so the box can be switched off in any state.
 
 For the manual installation onto an existing Raspberry Pi, there is an install guide [here](doc/README.md).
-
+There is a script [INSTALL_INTERCOM](doc/INSTALL_INTERCOM) that does nearly all of these steps.  
 
 ## GPIO and LEDs
 

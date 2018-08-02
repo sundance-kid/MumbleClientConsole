@@ -28,7 +28,7 @@ func (b *Talkiepi) initGPIO() {
 	go func() {
 		for {
 			currentState, err := b.Button.Read()
-
+            //TODO: implement support for a volume button
 			if currentState != b.ButtonState && err == nil {
 				b.ButtonState = currentState
 

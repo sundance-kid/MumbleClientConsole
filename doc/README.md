@@ -11,6 +11,12 @@ You should change this behavior by appending commandline arguments of e.g. `-ser
 It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory.
 
 
+## TL:DR
+
+
+There is a script [INSTALL_INTERCOM](INSTALL_INTERCOM) that does nearly all of these steps. 
+It assumes a file /boot/INTERCOM_SERVER.txt with the content of /conf/systemd/mumble.service already adapted to your setup (server IP, username, password).
+
 ## Create a user
 
 As root on your Raspberry Pi (`sudo -i`), create a mumble user:
@@ -35,7 +41,8 @@ export GOBIN=/home/mumble/bin
 
 cd $GOPATH
 
-go get github.com/layeh/gopus
+# formerly: go get github.com/layeh/gopus
+go get layeh.com/gopus
 go get github.com/MarcusWolschon/RasPi_stage_intercom
 
 cd $GOPATH/src/github.com/MarcusWolschon/RasPi_stage_intercom
