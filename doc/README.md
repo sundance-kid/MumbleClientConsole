@@ -6,7 +6,11 @@ This document also asumes that you have already configured network/wifi connecti
 (hint: add something like " ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:on" to cmdline.txt and create an empty file called "ssh" to get started.) 
 
 By default it will run without any arguments, it will autogenerate a username and then connect to the Talkipi mumble server. 
-You should change this behavior by appending commandline arguments of e.g. `-server 192.168.1.1:64738`, `-username CAM_A` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed. 
+You should change this behavior by appending commandline arguments of e.g. `-server 192.168.1.1:64738`,`-altserver 192.168.1.1:64738` , `-username CAM_A` to the ExecStart line in `/etc/systemd/system/mumble.service` once installed. 
+
+You can set -server and  -altserver to the same address. If server can not be reached, altserver is tried without any delay.
+A common setup is for -server to be the Ethernet-address and -altserver to be the address of the same server in Wifi.
+-server will always be tried first.
 
 It will also accept arguments for `-password`, `-insecure`, `-certificate` and `-channel`, all defined in `cmd/talkiepi/main.go`, if you run your own mumble server, these will be self explanatory. 
 

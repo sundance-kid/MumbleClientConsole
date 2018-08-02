@@ -35,7 +35,12 @@ func (b *Talkiepi) Connect() {
 
 	_, err = gumble.DialWithDialer(new(net.Dialer), b.Address, b.Config, &b.TLSConfig)
 	if err != nil {
-		fmt.Printf("Connection to %s failed (%s), attempting again in 10 seconds...\n", b.Address, err)
+		fmt.Printf("Connection to %s failed (%s), trying alternative server %s ...\n", b.Address, err, b.AltAddress)
+	       _, err = gumble.DialWithDialer(new(net.Dialer), b.AltAddress, b.Config, &b.TLSConfig)
+	}
+	if err != nil {
+		fmt.Printf("Connection to %s and %s failed (%s), attempting again in 5 seconds...\n", b.Address, b.AltAddress, err)
+		time.Sleep(5 * time.Second)
 		b.ReConnect()
 	} else {
 		b.OpenStream()
@@ -47,16 +52,15 @@ func (b *Talkiepi) ReConnect() {
 		b.Client.Disconnect()
 	}
 
-	if b.ConnectAttempts < 100 {
+	//if b.ConnectAttempts < 100 {
 		go func() {
-			time.Sleep(10 * time.Second)
 			b.Connect()
 		}()
 		return
-	} else {
-		fmt.Fprintf(os.Stderr, "Unable to connect, giving up\n")
-		os.Exit(1)
-	}
+	//} else {
+ //		fmt.Fprintf(os.Stderr, "Unable to connect, giving up\n")
+//		os.Exit(1)
+	//}
 }
 
 func (b *Talkiepi) OpenStream() {
@@ -106,7 +110,7 @@ func (b *Talkiepi) TransmitStop() {
 
 	b.LEDOff(b.TransmitLED)
 	b.LEDOff(b.Transmit2LED)
-	b.LEDOff(b.Transmit3LED)
+	b.LEDOff(b.Transmit2LED)
 
 	b.IsTransmitting = false
 }
@@ -147,9 +151,9 @@ func (b *Talkiepi) OnDisconnect(e *gumble.DisconnectEvent) {
 	b.LEDOff(b.Transmit3LED)
 
 	if reason == "" {
-		fmt.Printf("Connection to %s disconnected, attempting again in 10 seconds...\n", b.Address)
+		fmt.Printf("Connection to %s disconnected, attempting again...\n", b.Address)
 	} else {
-		fmt.Printf("Connection to %s disconnected (%s), attempting again in 10 seconds...\n", b.Address, reason)
+		fmt.Printf("Connection to %s disconnected (%s), attempting again...\n", b.Address, reason)
 	}
 
 	// attempt to connect again

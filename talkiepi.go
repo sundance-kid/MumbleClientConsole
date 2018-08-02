@@ -13,10 +13,8 @@ const (
 	OnlineLEDPin       uint = 18
 	ParticipantsLEDPin uint = 23
 	TransmitLEDPin     uint = 24
-	// OPTIONAL: additional transmit LED for illuminated PTT button
-	TransmitLED2Pin     uint = 7
-	// OPTIONAL: additional transmit LED for illuminated external PTT button
-	TransmitLED3Pin     uint = 12
+        TransmitLED2Pin    uint = 7
+	TransmitLED3Pin    uint = 12
 	ButtonPin          uint = 25
 )
 
@@ -25,6 +23,7 @@ type Talkiepi struct {
 	Client *gumble.Client
 
 	Address   string
+	AltAddress   string
 	TLSConfig tls.Config
 
 	ConnectAttempts uint
@@ -39,8 +38,8 @@ type Talkiepi struct {
 	OnlineLED       gpio.Pin
 	ParticipantsLED gpio.Pin
 	TransmitLED     gpio.Pin
-	Transmit2LED     gpio.Pin
-	Transmit3LED     gpio.Pin
+	Transmit2LED    gpio.Pin
+	Transmit3LED    gpio.Pin
 	Button          gpio.Pin
 	ButtonState     uint
 }

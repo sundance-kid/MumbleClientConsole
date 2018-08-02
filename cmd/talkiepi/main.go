@@ -15,6 +15,7 @@ import (
 func main() {
 	// Command line flags
 	server := flag.String("server", "192.168.1.1:64738", "the server to connect to")
+	altserver := flag.String("altserver", "192.168.8.102:64738", "alternative server to fail over to")
 	username := flag.String("username", "", "the username of the client")
 	password := flag.String("password", "", "the password of the server")
 	insecure := flag.Bool("insecure", true, "skip server certificate verification")
@@ -27,6 +28,7 @@ func main() {
 	b := talkiepi.Talkiepi{
 		Config:      gumble.NewConfig(),
 		Address:     *server,
+		AltAddress:  *altserver,
 		ChannelName: *channel,
 	}
 
