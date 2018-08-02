@@ -91,6 +91,8 @@ func (b *Talkiepi) TransmitStart() {
 
 	// turn on our transmit LED
 	b.LEDOn(b.TransmitLED)
+	b.LEDOn(b.Transmit2LED)
+	b.LEDOn(b.Transmit3LED)
 
 	b.Stream.StartSource()
 }
@@ -103,6 +105,8 @@ func (b *Talkiepi) TransmitStop() {
 	b.Stream.StopSource()
 
 	b.LEDOff(b.TransmitLED)
+	b.LEDOff(b.Transmit2LED)
+	b.LEDOff(b.Transmit3LED)
 
 	b.IsTransmitting = false
 }
@@ -139,6 +143,8 @@ func (b *Talkiepi) OnDisconnect(e *gumble.DisconnectEvent) {
 	b.LEDOff(b.OnlineLED)
 	b.LEDOff(b.ParticipantsLED)
 	b.LEDOff(b.TransmitLED)
+	b.LEDOff(b.Transmit2LED)
+	b.LEDOff(b.Transmit3LED)
 
 	if reason == "" {
 		fmt.Printf("Connection to %s disconnected, attempting again in 10 seconds...\n", b.Address)

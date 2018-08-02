@@ -60,6 +60,26 @@ There is a script [INSTALL_INTERCOM](doc/INSTALL_INTERCOM) that does nearly all 
 
 ## GPIO and LEDs
 
+Pins used: (single row only, so no dual-row connectors are needed)
+
+#2  = (unused +5V)
+#4  = (unused +5V)
+#6  = GND
+#8  = (unused GPIO 14)
+#10 = (unused GPIO 15)
+#12 = GPIO 18 = +3.3V for "Online" LED
+#14 = GND
+#16 = GPIO 23 = +3.3V for "Participants" LED
+#18 = GPIO 24 = +3.3V for "Transmit" LED
+#20 = GND
+#22 = GPIO 25 = Push To Talk (PTT) Button input
+#24  = (unused GPIO 8)
+#26  = (unused GPIO 7)
+#28  = (unused I2C)
+#30 = GND
+#32 = GPIO 12 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
+
+
 You can edit your pin assignments in `talkiepi.go`
 ```go
 const (

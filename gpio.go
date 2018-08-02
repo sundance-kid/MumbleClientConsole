@@ -52,6 +52,8 @@ func (b *Talkiepi) initGPIO() {
 	b.OnlineLED = gpio.NewOutput(OnlineLEDPin, false)
 	b.ParticipantsLED = gpio.NewOutput(ParticipantsLEDPin, false)
 	b.TransmitLED = gpio.NewOutput(TransmitLEDPin, false)
+	b.Transmit2LED = gpio.NewOutput(TransmitLEDPin, false)
+	b.Transmit3LED = gpio.NewOutput(TransmitLEDPin, false)
 }
 
 func (b *Talkiepi) LEDOn(LED gpio.Pin) {
