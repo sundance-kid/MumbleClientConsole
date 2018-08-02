@@ -20,7 +20,10 @@ It will also accept arguments for `-password`, `-insecure`, `-certificate` and `
 
 There is a script [INSTALL_INTERCOM](INSTALL_INTERCOM) that does nearly all of these steps.  
 In addition INTALL_VOLUME_KEYS allowy you to also control the ALSA output level of the headphone via 2 buttons on GPIO-pins. 
-It assumes a file /boot/INTERCOM_SERVER.txt with the content of /conf/systemd/mumble.service already adapted to your setup (server IP, username, password). 
+It assumes a file /boot/INTERCOM_SERVER.txt with the content of /conf/systemd/mumble.service already adapted to your setup (server IP, username, password).
+
+When you are done, see [here](https://learn.adafruit.com/read-only-raspberry-pi/) about a nice script to make the file system read-only (unless a jumper is set at boot time).
+GPIO21 (last in the row) looks like a good choice for the R/W jumper.
 
 ## Create a user
 
