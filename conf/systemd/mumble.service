@@ -7,8 +7,8 @@ After = multi-user.target
 User = mumble  
 Group = mumble  
 Type = simple  
-ExecStart = /home/mumble/bin/talkiepi -server 192.168.1.1:64738
-Restart = on-abort  
+ExecStart = /home/mumble/bin/talkiepi -server 192.168.1.1:64738 -altserver 192.168.1.1:64738 
+Restart = always 
 RestartSec = 5
 
 [Install]

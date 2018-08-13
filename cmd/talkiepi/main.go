@@ -5,11 +5,12 @@ import (
 	"crypto/tls"
 	"flag"
 	"fmt"
-	"os"
-
 	"github.com/dchote/gumble/gumble"
 	_ "github.com/dchote/gumble/opus"
 	"github.com/MarcusWolschon/RasPi_stage_intercom"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -62,4 +63,13 @@ func main() {
 	}
 
 	b.Init()
+
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	exitStatus := 0
+
+	<-sigs
+	b.CleanUp()
+
+	os.Exit(exitStatus)
 }

@@ -1,7 +1,7 @@
 # Boot to RasPi stage intercom
 
 This is a simple overview to scratch install RasPi stage intercom (based on [talkiepi](https://github.com/dchote/talkiepi/)) on your Raspberry Pi, and have it start on boot. 
-This document assumes that you have raspbian-jessie-lite installed on your SD card, and that the distribution is up to date. 
+This document assumes that you have raspbian-stretch-lite installed on your SD card, and that the distribution is up to date.
 This document also asumes that you have already configured network/wifi connectivity on your Raspberry Pi. 
 (hint: add something like " ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:on" to cmdline.txt and create an empty file called "ssh" to get started.) 
 
