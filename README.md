@@ -66,19 +66,19 @@ Pins used: (single row only, so no dual-row connectors are needed)
 
 * 2  = (unused +5V)
 * 4  = (unused +5V)
-* 6  = GND
+* 6  = GND (for volume)
 * 8  = GPIO 14 RESERVED for "Volume+" button
 * 10 = GPIO 15 RESERVED for "Volume-" button
 * 12 = GPIO 18 = +3.3V for "Online" LED
-* 14 = GND
+* 14 = GND (for LEDs)
 * 16 = GPIO 23 = +3.3V for "Participants" LED
 * 18 = GPIO 24 = +3.3V for "Transmit" LED
-* 20 = GND
-* 22 = GPIO 25 = Push To Talk (PTT) Button input
+* 20 = GND (for PTT)
+* 22 = GPIO 25 = Push To Talk (PTT) Button input with pull-up
 * 24  = (unused GPIO 8)
 * 26 GPIO 7 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
 * 28  = (unused I2C)
-* 30 = GND
+* 30 = GND (for external "Transmit" LED)
 * 32 = GPIO 12 = +3.3V for a second "Transmit" LED (PTT buttons with build-in LEDs)
 
 

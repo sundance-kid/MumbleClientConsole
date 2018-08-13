@@ -101,6 +101,8 @@ Now as root again (`sudo -i`), edit `/etc/systemd/system/mumble.service` appendi
 
 Run `systemctl daemon-reload` and then `service mumble restart` and you should be set with a tls certificate!
 
+For debugging audio you can start /home/mumble/bin/talkiepi with export ALSOFT_LOGLEVEL=4 set; 
+
 
 ## Install the USB soundcard
 
