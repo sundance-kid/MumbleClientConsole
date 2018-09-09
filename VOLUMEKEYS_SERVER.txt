@@ -1,14 +1,16 @@
 [Unit]
-Description = gpio-watch for volume keys  
+Description = gpio-watch for volume keys
 Requires = systemd-user-sessions.service sound.target
 After = multi-user.target
 
 [Service]
-User = mumble  
-Group = mumble  
-Type = simple  
+User = root
+Group = root
+Type = simple
+ExecStartPre = /usr/bin/raspi-gpio set 15 pu
+ExecStartPre = /usr/bin/raspi-gpio set 14 pu
 ExecStart = /root/gpio-watch/gpio-watch 14:switch 15:switch
-Restart = on-abort  
+Restart = on-abort
 RestartSec = 5
 
 [Install]
