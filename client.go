@@ -15,9 +15,7 @@ import (
 func (b *Talkiepi) Init() {
 	b.Config.Attach(gumbleutil.AutoBitrate)
 	b.Config.Attach(b)
-
 	b.initGPIO()
-
 	b.Connect()
 }
 
@@ -55,7 +53,7 @@ func (b *Talkiepi) ReConnect() {
 		}()
 		return
 	//} else {
- //		fmt.Fprintf(os.Stderr, "Unable to connect, giving up\n")
+ //		fmt.Fprintf(os.Stderr, "Unable to connect, giving up...\n")
 //		os.Exit(1)
 	//}
 }
