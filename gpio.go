@@ -3,10 +3,10 @@ package talkiepi
 import (
 	"fmt"
 	"time"
-
 	"github.com/dchote/gpio"
 	"github.com/stianeikeland/go-rpio"
 )
+
 
 func (b *Talkiepi) initGPIO() {
 	// we need to pull in rpio to pullup our button pin
@@ -20,35 +20,33 @@ func (b *Talkiepi) initGPIO() {
 
 	ButtonPinPullUp := rpio.Pin(ButtonPin)
 	ButtonPinPullUp.PullUp()
-
 	rpio.Close()
 
-	// unfortunately the gpio watcher stuff doesnt work for me in this context, so we have to poll the button instead
-	b.Button = gpio.NewInput(ButtonPin)
-	go func() {
-		for {
+	// Polling PTT button
+	b.Button = gpio.NewInput(ButtonPin)		// Assign the PTT button GPIO-Pin
+	
+	go func() {														// start polling thread
+		for {														// forever loop...
 			currentState, err := b.Button.Read()
-            //TODO: implement support for a volume button
 			if currentState != b.ButtonState && err == nil {
 				b.ButtonState = currentState
 
 				if b.Stream != nil {
 					if b.ButtonState == 1 {
-						fmt.Printf("Button is released\n")
+						fmt.Printf("PTT-Button is released...\n")
 						b.TransmitStop()
 					} else {
-						fmt.Printf("Button is pressed\n")
+						fmt.Printf("PTT-Button is pressed...\n")
 						b.TransmitStart()
 					}
 				}
 
 			}
-
 			time.Sleep(500 * time.Millisecond)
-		}
+		} // for
 	}()
 
-	// then we can do our gpio stuff
+	// then we can do our GPIO stuff
 	b.OnlineLED = gpio.NewOutput(OnlineLEDPin, false)
 	b.ParticipantsLED = gpio.NewOutput(ParticipantsLEDPin, false)
 	b.TransmitLED = gpio.NewOutput(TransmitLEDPin, false)
@@ -56,19 +54,19 @@ func (b *Talkiepi) initGPIO() {
 	b.Transmit3LED = gpio.NewOutput(TransmitLEDPin, false)
 }
 
+
 func (b *Talkiepi) LEDOn(LED gpio.Pin) {
 	if b.GPIOEnabled == false {
 		return
 	}
-
 	LED.High()
 }
+
 
 func (b *Talkiepi) LEDOff(LED gpio.Pin) {
 	if b.GPIOEnabled == false {
 		return
 	}
-
 	LED.Low()
 }
 
@@ -76,7 +74,6 @@ func (b *Talkiepi) LEDOffAll() {
 	if b.GPIOEnabled == false {
 		return
 	}
-
 	b.LEDOff(b.OnlineLED)
 	b.LEDOff(b.ParticipantsLED)
 	b.LEDOff(b.TransmitLED)
